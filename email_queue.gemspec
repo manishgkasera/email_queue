@@ -20,4 +20,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "hirb"
+
+  spec.add_dependency "activerecord"
+  spec.add_dependency "mysql"
+  spec.add_dependency "mail"
 end
