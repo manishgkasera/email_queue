@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activerecord"
   spec.add_dependency "mysql"
   spec.add_dependency "mail"
+  spec.add_dependency "faker"
 end
