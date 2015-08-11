@@ -43,7 +43,6 @@ module EmailQueue
     # checks every SLEEP_TIME seconds
     def next_job(worker)
       while(!stop_flag) do
-        puts "reserving job for worker....#{worker.id}"
         base_scope = Queue.queued.where(['worker_id is null or worker_id = ?', worker.id])
         queue_item = base_scope.order(:id).limit(5).detect do |q|
           reserved_count = base_scope.where(id: q.id).update_all(worker_id: worker.id)
@@ -55,7 +54,6 @@ module EmailQueue
           queue_item.worker_id_will_change!
           return Job.new(queue_item)
         else
-          puts "Waiting for job....sleeping-#{worker.id}"
           sleep(SLEEP_TIME)
         end
       end
@@ -84,7 +82,6 @@ module EmailQueue
           if worker = @workers.find(&:free)
             return(worker)
           else
-            puts "Waiting for worker....sleeping"
             sleep(SLEEP_TIME)
           end
         end
