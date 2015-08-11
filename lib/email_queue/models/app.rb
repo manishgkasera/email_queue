@@ -35,8 +35,10 @@ module EmailQueue
       while(!stop_flag) do
         worker = find_free_worker
         job = self.next_job(worker)
-        worker.free = false
-        worker.do_in_background(job)
+        if worker && job
+          worker.free = false
+          worker.do_in_background(job)
+        end
       end
     end
 
