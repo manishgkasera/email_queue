@@ -8,3 +8,6 @@ Mail.defaults do
                   authentication: :plain
 
 end
+
+# other configuration options can be found at
+# https://github.com/mikel/mail
