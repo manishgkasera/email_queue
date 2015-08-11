@@ -5,6 +5,11 @@ module EmailQueue
       @queue_item = queue_item
     end
 
+    # the actual sending of email happens here
+    # the smtp or other configuration can be changed from config/mail.rb file.
+    #
+    # the queue implementation is generic enough to support other types of jobs
+    # except the schema and the below function
     def process
       mail = Mail.new
       mail.from = queue_item.from_email_address
