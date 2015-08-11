@@ -10,6 +10,7 @@ module EmailQueue
     end
 
     def do_in_background(job)
+      return if job.nil?
       t = Thread.new do
         job.process
         if job.error_details
