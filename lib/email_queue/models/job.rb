@@ -6,15 +6,15 @@ module EmailQueue
     end
 
     def process
-      puts "processing ..#{queue_item.id.to_s}"
-      # Mail.deliver do
-      #   from     queue_item.from_email_address
-      #   to       queue_item.to_email_address
-      #   subject  queue_item.subject
-      #   body     queue_item.body
-      # end
-      File.open('/tmp/a.log', 'a') do |f|
-        f.write("Processing: " + queue_item.id.to_s + "\n")
+      mail = Mail.new
+      mail.from = queue_item.from_email_address
+      mail.to = queue_item.to_email_address
+      mail.subject = queue_item.subject
+      mail.body = queue_item.body
+      begin
+        mail.deliver!
+      rescue => e
+        @error_details = e.message
       end
     end
   end
